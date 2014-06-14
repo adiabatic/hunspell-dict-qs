@@ -1,0 +1,31 @@
+# Affix file for Quikscript Hunspell dictionary.
+# This file is in the public domain.
+SET UTF-8
+
+TRY 
+
+# KEY is for keyboard-layout-specific suggestions.
+# King Kong
+KEY ||
+
+# REP <number of replacement definitions (not including this one)>
+# REP from to
+
+# WARN <flag> — warns when a word with this flag is used
+WARN W
+
+# BREAK <number of break definitions>
+# BREAK <character or character sequence>
+# Define word breaks.
+BREAK 3
+BREAK -
+BREAK –
+BREAK —
+
+
+# PFX <flag> <can combine prefixes and suffixes> <number>
+# PFX <flag> <stripping> <prefix> [condition [morphological fields…]]
+
+# re-
+PFX r Y 1
+PFX r 0  .
