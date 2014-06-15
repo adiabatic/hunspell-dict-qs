@@ -1,6 +1,7 @@
 # Affix file for Quikscript Hunspell dictionary.
 # This file is in the public domain.
 SET UTF-8
+FLAG UTF-8
 
 WORDCHARS 
 
@@ -31,3 +32,13 @@ BREAK —
 # re-
 PFX r Y 1
 PFX r 0  .
+
+
+SFX  Y 1
+SFX  0  .
+
+SFX  Y 1
+SFX  0  .
+
+SFX  Y 1
+SFX  0  .
