@@ -2,6 +2,8 @@
 # This file is in the public domain.
 SET UTF-8
 
+WORDCHARS 
+
 TRY 
 
 # KEY is for keyboard-layout-specific suggestions.
