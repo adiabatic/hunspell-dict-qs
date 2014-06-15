@@ -26,19 +26,26 @@ BREAK –
 BREAK —
 
 
-# PFX <flag> <can combine prefixes and suffixes> <number>
-# PFX <flag> <stripping> <prefix> [condition [morphological fields…]]
+# PFX <flag> <can combine prefix with a suffix> (Y/N)> <number>
+# PFX <flag> <letters to delete or 0> <prefix> [condition regex] [morphological fields]
 
 # re-
 PFX r Y 1
 PFX r 0  .
 
-
+# terminal -s
 SFX  Y 1
 SFX  0  .
 
+# terminal -z
 SFX  Y 1
 SFX  0  .
+#  -> ? (or just for "knife" and "strife")
 
+# terminal -(e)d
 SFX  Y 1
 SFX  0  .
+
+# terminal -n (know/n, take/n)
+SFX  Y 1
+SFX  0  .
