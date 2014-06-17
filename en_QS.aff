@@ -3,7 +3,7 @@
 SET UTF-8
 FLAG UTF-8
 
-WORDCHARS 
+WORDCHARS 
 
 TRY 
 
@@ -37,15 +37,57 @@ PFX r 0  .
 SFX  Y 1
 SFX  0  .
 
-# terminal -z
-SFX  Y 1
+# terminal -z (or -s after p/t/k/T)
+SFX  Y 2
 SFX  0  .
+SFX  0  []
 #  -> ? (or just for "knife" and "strife")
 
-# terminal -(e)d
-SFX  Y 1
+# terminal -d (or -t after p/k/T/f/s/S/tS)
+SFX  Y 2
 SFX  0  .
+SFX    []
 
-# terminal -n (know/n, take/n)
+# “Terminal -ing” (from The Manual, p. 18)
+# “Provided it is an affix and not a root, omit vowel-.”
+# “calling”, “writings” and “lovingly” have no ;
+# “bringing” only has the initial ;
+# “wing”, “things”, and “Epping” have the .
+#
+# “spell the root fully after a prefix or with somewhat changed meaning”
+# …I don’t understand this rule well enough to codify it.
+# terminal -N
+SFX  Y 2
+SFX  0  .
+SFX  0  [] # “spell - in full after roots ending in -”
+
+# terminal -@n (take/n) (p. 19)
 SFX  Y 1
-SFX  0  .
+SFX  0  .
+
+# terminal -i (stressed final vowel as in legatee, lessee, payee) (p. 20)
+SFX  Y 1
+SFX  0  .
+
+# terminal -lI
+SFX  Y 2
+SFX  0  .
+SFX  0  [] # manual -> manually
+
+# terminal -@`
+SFX  Y 1
+SFX  0  .
+
+# TO PONDER: Should all prefixes be in Latin script?
+
+# initial @n- (p. 21)
+PFX  Y 1
+PFX  0  .
+
+# initial bI- (p. 22)
+PFX  Y 1
+PFX  0  .
+
+# initial dI- (p. 22)
+PFX d Y 1
+PFX d 0  .
