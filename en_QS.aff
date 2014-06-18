@@ -91,3 +91,7 @@ PFX  0  .
 # initial dI- (p. 22)
 PFX d Y 1
 PFX d 0  .
+
+# initial pre- (p. 22)
+PFX p Y 1
+PFX p 0  .
