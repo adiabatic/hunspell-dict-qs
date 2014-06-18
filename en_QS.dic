@@ -1,4 +1,3 @@
-*
 259 # number of lines in file (assuming trailing newline) - 2 — only needs to be an approximate!
 
 
@@ -353,3 +352,10 @@
 /
 
 
+/p po:verb
+/
+/
+
+/
+/
+/
