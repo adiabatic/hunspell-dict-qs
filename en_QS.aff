@@ -45,8 +45,8 @@ SFX  0  []
 
 # terminal -d (or -t after p/k/T/f/s/S/tS)
 SFX  Y 2
-SFX  0  .
-SFX    []
+SFX  0  [^]
+SFX  0  []
 
 # “Terminal -ing” (from The Manual, p. 18)
 # “Provided it is an affix and not a root, omit vowel-.”
