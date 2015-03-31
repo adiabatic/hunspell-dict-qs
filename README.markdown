@@ -18,3 +18,7 @@ I then match using the specific subsets “\1 \4”. Duplicates get shunted to a
 
 [hunspell]: http://hunspell.sourceforge.net/
 [quikscript]: http://en.wikipedia.org/wiki/Quikscript
+
+## License
+
+[CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
