@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import fileinput
 
+FILENAME = 'en_QS.dic'
 M = {
     '\ue650': 'pea',
     '\ue651': 'bay',
@@ -54,13 +55,15 @@ M = {
 }
 
 for k, v in M.items():
-    M[k] = "•" + v + " "
+    M[k] = "•" + v
 
 class L(object):
     def __str__(self):
-        if self.word and self.extras:
-            return latinize(self.word) + "/" + latinize(self.extras)
-        return latinize(self.word)
+        return str(dict(word=latinize(self.word),
+                        extras=latinize(self.extras),
+                        po=self.po,
+                        comment=self.comment,
+                        error=self.error))
 
 def latinize(s):
     """
@@ -81,29 +84,64 @@ def parse_line(l):
     r.comment = ''
     r.error = False
         
-    if l.startswith('#'):
-        r.comment = l
-        return r
-        
-    for i, ch in enumerate(l):
-        if ch != '/' or ch != ' ':
-            r.word += ch
-        else:
-            if ch == '/':
-                for j, chh in enumerate(l[i:]):
-                    if chh != ' ':
-                        r.extras += chh
-            if ch == ' ':
-                break
+    slashlist = l.split('/', 1)
+    if len(slashlist) == 1: # "abc" or "abc po:verb" or "abc # …" or "abc po:verb # …"
+        spacelist = slashlist[0].split(' ', 1)
+        if len(spacelist) == 1: # "abc"
+            r.word = spacelist[0]
+        elif len(spacelist) == 2: # "abc po:verb" or "abc # …" or "abc po:verb # …"
+            r.word = spacelist[0]
+            if spacelist[1].startswith('po:'):
+                pol = spacelist[1].split(' ', 1)
+                if len(pol) == 1:
+                    r.po = spacelist[1]
+                elif len(pol) == 2:
+                    r.po = spacelist[1]
+                    if pol[1].startswith('#'):
+                        r.comment = pol[1]
+            elif spacelist[1].startswith('#'):
+                r.comment = spacelist[1]
+                
+            r.tail = spacelist[1]
+    elif len(slashlist) == 2: #"abc/z" or "abc/z po:verb" or "abc/z po:verb # …"
+        r.word = slashlist[0]
+        spacelist = slashlist[1].split(' ', 1)
+        r.extras = spacelist[0]
+        if len(spacelist) == 2:
+            if spacelist[1].startswith('po:'):
+                pol = spacelist[1].split(' ', 1)
+                if len(pol) == 1:
+                    r.po = spacelist[1]
+                elif len(pol) == 2:
+                    r.po = spacelist[1]
+                    if pol[1].startswith('#'):
+                        r.comment = pol[1]
+            elif spacelist[1].startswith('#'):
+                r.comment = spacelist[1]
     
+    r.word = r.word.strip()
+    r.extras = r.extras.strip()
+    r.po = r.po.strip()
+    r.comment = r.comment.strip()
     return r
 
-for line in fileinput.input('en_QS.dic'):
+for line in fileinput.input(FILENAME):
     if fileinput.isfirstline(): continue # skip the line with the line-count estimate
     i = fileinput.filelineno()
     
     l = parse_line(line)
-    print(l)
+        
     if l.error:
         print(l.error)
         break
+    
+    # p. 18: terminal -es, -ed
+    # TBI
+    
+    # p. 18: terminal -ing
+    if l.word.endswith('\ue670\ue664') and not ('noun' in l.po):
+        print('{}:{}:Final -ing with preceding •it: {}'.format(FILENAME, i, latinize(l.word)))
+    
+    
+    #print(l)
+    
