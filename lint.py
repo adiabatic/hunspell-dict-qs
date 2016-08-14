@@ -141,7 +141,12 @@ for line in fileinput.input(FILENAME):
     # p. 18: terminal -ing
     if l.word.endswith('\ue670\ue664') and not ('noun' in l.po):
         print('{}:{}:Final -ing with preceding •it: {}'.format(FILENAME, i, latinize(l.word)))
-    
+
+    # p. 19: terminal -al, el, -le, il
+    # Generally, omit any _unstressed_ vowel sound between the L and the preceding consonant
+    if l.word.endswith('\ue667'):
+        print('{}:{}:Final -l with preceding (unstressed?) vowel: {}'.format(FILENAME, i, latinize(l.word)))
+        
     
     #print(l)
     
