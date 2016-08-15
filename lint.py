@@ -79,50 +79,33 @@ def latinize(s):
 def parse_line(l):
     r = L()
     r.word = ''
-    r.extras = ''
-    r.po = ''
+    r.affixes = ''
+    r.partofspeech = '' # po:noun
+    r.stem = '' # feet st:foot is:plural
+    r.allomorphs = [] # sing al:sang al:sung; sang st:sing; sung st:sing
+    r.inflectionalsuffixes = [] # feet st:foot is:plural
     r.comment = ''
     r.error = False
-        
-    slashlist = l.split('/', 1)
-    if len(slashlist) == 1: # "abc" or "abc po:verb" or "abc # …" or "abc po:verb # …"
-        spacelist = slashlist[0].split(' ', 1)
-        if len(spacelist) == 1: # "abc"
-            r.word = spacelist[0]
-        elif len(spacelist) == 2: # "abc po:verb" or "abc # …" or "abc po:verb # …"
-            r.word = spacelist[0]
-            if spacelist[1].startswith('po:'):
-                pol = spacelist[1].split(' ', 1)
-                if len(pol) == 1:
-                    r.po = spacelist[1]
-                elif len(pol) == 2:
-                    r.po = spacelist[1]
-                    if pol[1].startswith('#'):
-                        r.comment = pol[1]
-            elif spacelist[1].startswith('#'):
-                r.comment = spacelist[1]
-                
-            r.tail = spacelist[1]
-    elif len(slashlist) == 2: #"abc/z" or "abc/z po:verb" or "abc/z po:verb # …"
-        r.word = slashlist[0]
-        spacelist = slashlist[1].split(' ', 1)
-        r.extras = spacelist[0]
-        if len(spacelist) == 2:
-            if spacelist[1].startswith('po:'):
-                pol = spacelist[1].split(' ', 1)
-                if len(pol) == 1:
-                    r.po = spacelist[1]
-                elif len(pol) == 2:
-                    r.po = spacelist[1]
-                    if pol[1].startswith('#'):
-                        r.comment = pol[1]
-            elif spacelist[1].startswith('#'):
-                r.comment = spacelist[1]
     
-    r.word = r.word.strip()
-    r.extras = r.extras.strip()
-    r.po = r.po.strip()
-    r.comment = r.comment.strip()
+    # see also: `man 5 hunspell, "optional data fields"`
+    
+    xs = l.split()
+    if '/' in xs[0]: (r.word, r.affixes) = xs[0].split('/')
+    else:             r.word = xs[0]
+    for i in range(1, len(xs)):
+        x = xs[i]
+        if x.startswith('po:'):
+            r.partofspeech = x[3:]
+        elif x.startswith('st:'):
+            r.stem = x[3:]
+        elif x.startswith('al:'):
+            r.allomorphs.append(x[3:])
+        elif x.startswith('is:'):
+            r.inflectionalsuffixes.append(x[3:])
+        elif x.startswith('#'):
+            x = x[1:].strip()
+            r.comment = ' '.join(xs[i:])
+        
     return r
 
 for line in fileinput.input(FILENAME):
@@ -143,7 +126,7 @@ for line in fileinput.input(FILENAME):
             
     
     # p. 18: terminal -ing
-    if l.word.endswith('\ue670\ue664') and not ('noun' in l.po):
+    if l.word.endswith('\ue670\ue664') and not ('noun' in l.partofspeech):
         print('{}:{}: Final -ing with preceding •it: {}'.format(FILENAME, i, latinize(l.word)))
 
     # p. 19: terminal -al, el, -le, il
