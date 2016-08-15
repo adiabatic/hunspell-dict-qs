@@ -119,10 +119,11 @@ for line in fileinput.input(FILENAME):
         break
     
     # p. 18: terminal -es, -ed
-    # TBI
-    if l.word.endswith('\ue65b'):
+    # AFAICT these are entirely handled with the •zoo and •day suffixes in the .aff file.
+    if False and l.word.endswith('\ue65b'): # •zoo
         if l.word.endswith('\ue67a\ue65b'): # •utter •zoo
             print('{}:{}: Final •zoo with preceding •utter: {}'.format(FILENAME, i, latinize(l.word)))
+        
             
     
     # p. 18: terminal -ing
