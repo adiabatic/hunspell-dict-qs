@@ -1,5 +1,8 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
+
+# Everyone says "who watches the watchers?", but who spell-checks the spell-checkers?
+
 import fileinput
 
 FILENAME = 'en_QS.dic'
@@ -56,6 +59,8 @@ M = {
 
 for k, v in M.items():
     M[k] = "•" + v
+
+VOWELS = set(chr(x) for x in range(0xe670, 0xe67e+1))
 
 class L(object):
     def __str__(self):
@@ -122,19 +127,21 @@ for line in fileinput.input(FILENAME):
     # AFAICT these are entirely handled with the •zoo and •day suffixes in the .aff file.
     if False and l.word.endswith('\ue65b'): # •zoo
         if l.word.endswith('\ue67a\ue65b'): # •utter •zoo
-            print('{}:{}: Final •zoo with preceding •utter: {}'.format(FILENAME, i, latinize(l.word)))
-        
-            
+            print('{}:{}: Final •zoo with preceding •utter: {}'.format(FILENAME, i, latinize(l.word)))            
     
     # p. 18: terminal -ing
     if l.word.endswith('\ue670\ue664') and not ('noun' in l.partofspeech):
         print('{}:{}: Final -ing with preceding •it: {}'.format(FILENAME, i, latinize(l.word)))
 
     # p. 19: terminal -al, el, -le, il
-    # Generally, omit any _unstressed_ vowel sound between the L and the preceding consonant
+    # • Generally, omit any _unstressed_ vowel sound between the L and the preceding consonant
+    # • Where another syllable is added, the vowel sound before this L must be pronounced and spelt
+    #   in most cases
+    #   (so: "level" as -vl, but "levelling" as -v@lN (or maybe -vElN))
     if l.word.endswith('\ue667'):
-        pass #print('{}:{}: Final -l with preceding (unstressed?) vowel: {}'.format(FILENAME, i, latinize(l.word)))
-        
+        if len(l.word) >=2 and l.word[-2] in VOWELS:
+            print('{}:{}: Final -l with preceding (unstressed?) vowel: {}'.format(FILENAME, i, latinize(l.word)))
+    
     
     #print(l)
     
