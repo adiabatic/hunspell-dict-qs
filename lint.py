@@ -71,16 +71,8 @@ class L(object):
                         error=self.error))
 
 def latinize(s):
-    """
-        r = ''
-        for ch in s:
-            if ch in M:
-                r += M[ch]
-            else:
-                r += ch
-        return r
-    """
     return s.translate(str.maketrans(M))
+
 def parse_line(l):
     r = L()
     r.word = ''
