@@ -126,13 +126,17 @@ for line in fileinput.input(FILENAME):
         print('{}:{}: Final -ing with preceding •it: {}'.format(FILENAME, i, latinize(l.word)))
 
     # p. 19: terminal -al, el, -le, il
-    # • Generally, omit any _unstressed_ vowel sound between the L and the preceding consonant
+    # • Generally, omit any _unstressed_ vowel sound between the L and the preceding consonant,
+    #   as in "triba̷l", "fina̷l", "ora̷l", "offici̷a̷l", "rifle̷", "devi̷l"
     # • Where another syllable is added, the vowel sound before this L must be pronounced and spelt
-    #   in most cases
-    #   (so: "level" as -vl, but "levelling" as -v@lN (or maybe -vElN))
+    #   in most cases, as in "fina̲lly", "ora̲lly", "officia̲lly", "devi̲lry"
+    # • Ls don't need a vowel before the •ye in "Spaniel", but you need an •utter before •low in
+    #   "burial", "visual", and "loyal".
     if l.word.endswith('\ue667'):
-        if len(l.word) >=2 and l.word[-2] in VOWELS:
+        if False and len(l.word) >=2 and l.word[-2] in VOWELS: # lots of false positives
             print('{}:{}: Final -l with preceding (unstressed?) vowel: {}'.format(FILENAME, i, latinize(l.word)))
+        if len(l.word) >=2 and l.word[-2] in {'\ue67a'}:
+            print('{}:{}: Final -l with preceding •utter: {}'.format(FILENAME, i, latinize(l.word)))
     
     
     #print(l)
