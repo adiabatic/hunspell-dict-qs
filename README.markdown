@@ -13,6 +13,7 @@ I usually copy text to the clipboard, run `$ pbpaste | hunspell -d en_QS | pbcop
 I use lint.py to make sure that I’m not accidentally violating spelling rules in Read’s own manual. I use pragmas in the comments to tell the automated linter that some constructions, in some words, are OK. These are:
 
 - utter-low-ok — this word ends in •utter•low, and that’s OK
+- et-no-tea-ok (e.g. “spent”)
 
 
 ## Hacking

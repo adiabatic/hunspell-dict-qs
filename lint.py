@@ -148,5 +148,9 @@ for line in fileinput.input(FILENAME):
     # Written invariably as •utter•no; no contraction, no alternatives.
     # [implementer’s note: how in blazes is a modern English speaker supposed to differentiate between the two without referencing Orthodox? I’m tempted to codify “always elide the •utter”, but then I’d be overstepping my bounds as a dictionary author…]
     
+    # p. 19: terminal -ent, -ant, -ence, -ance
+    # written invariably with standard •utter•no followed by a penlift
+    if l.word.endswith('\ue672\ue666\ue652'):
+        print('{}:{}: ends with •et•no•tea; prefer •utter•no•tea: {}'.format(FILENAME, i, latinize(l.word)))    
     #print(l)
     
