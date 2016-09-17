@@ -150,7 +150,9 @@ for line in fileinput.input(FILENAME):
     
     # p. 19: terminal -ent, -ant, -ence, -ance
     # written invariably with standard •utter•no followed by a penlift
-    if l.word.endswith('\ue672\ue666\ue652'):
+    if l.word.endswith('\ue672\ue666\ue652') and 'et-no-tea-ok' not in l.comment:
         print('{}:{}: ends with •et•no•tea; prefer •utter•no•tea: {}'.format(FILENAME, i, latinize(l.word)))    
+    if l.word.endswith('\ue672\ue666\ue65a') and 'et-no-see-ok' not in l.comment:
+        print('{}:{}: ends with •et•no•see; prefer •utter•no•see: {}'.format(FILENAME, i, latinize(l.word)))    
     #print(l)
     

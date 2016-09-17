@@ -14,6 +14,7 @@ I use lint.py to make sure that I’m not accidentally violating spelling rules 
 
 - utter-low-ok — this word ends in •utter•low, and that’s OK
 - et-no-tea-ok (e.g. “spent”)
+- et-no-see-ok
 
 
 ## Hacking
