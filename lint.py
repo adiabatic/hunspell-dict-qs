@@ -61,6 +61,7 @@ for k, v in M.items():
     M[k] = "•" + v
 
 VOWELS = set(chr(x) for x in range(0xe670, 0xe67e+1))
+VOWELS_AND_SEMIVOWELS = VOWELS.union(set('\ue660'))
 
 class L(object):
     def __str__(self):
@@ -132,10 +133,13 @@ for line in fileinput.input(FILENAME):
     #   in most cases, as in "fina̲lly", "ora̲lly", "officia̲lly", "devi̲lry"
     # • Ls don't need a vowel before the •ye in "Spaniel", but you need an •utter before •low in
     #   "burial", "visual", and "loyal".
-    if l.word.endswith('\ue667'):
+    if l.word.endswith('\ue667'): # •low
         if False and len(l.word) >=2 and l.word[-2] in VOWELS: # lots of false positives
             print('{}:{}: Final -l with preceding (unstressed?) vowel: {}'.format(FILENAME, i, latinize(l.word)))
-        if len(l.word) >=2 and l.word[-2] in {'\ue67a'}:
+        if len(l.word) >= 3 and \
+           l.word[-2] in {'\ue67a': '•utter'}.keys() and \
+           l.word[-3] not in VOWELS and \
+           "utter-low-ok" not in l.comment:
             print('{}:{}: Final -l with preceding •utter: {}'.format(FILENAME, i, latinize(l.word)))
     
     
