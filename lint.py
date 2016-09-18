@@ -37,7 +37,7 @@ M = {
     '\ue66b': 'excite',
     '\ue66c': 'exam',
     '\ue66d': '(unused)',
-    '\ue66e': '{left angled paren}',
+    '\ue66e': '(left angled paren)',
     '\ue66f': '(right angled paren)',
     '\ue670': 'it',
     '\ue671': 'eat',
