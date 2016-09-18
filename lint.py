@@ -167,6 +167,9 @@ for line in fileinput.input(FILENAME):
         print('{}:{}: ends with •may•utter•no•tea; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
     if l.word.endswith('\ue665\ue672\ue666\ue652'):
         print('{}:{}: ends with •may•et•no•tea; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
+    
+    if l.word.endswith('\ue665\ue67a\ue666') and 'may-utter-ok' not in l.comment:
+        print('{}:{}: ends with •may•utter•no; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
 
 
     #print(l)
