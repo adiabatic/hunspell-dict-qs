@@ -154,5 +154,20 @@ for line in fileinput.input(FILENAME):
         print('{}:{}: ends with •et•no•tea; prefer •utter•no•tea: {}'.format(FILENAME, i, latinize(l.word)))    
     if l.word.endswith('\ue672\ue666\ue65a') and 'et-no-see-ok' not in l.comment:
         print('{}:{}: ends with •et•no•see; prefer •utter•no•see: {}'.format(FILENAME, i, latinize(l.word)))    
+    
+    # p. 20: terminal -land, -ment, -man, -men
+    # The unstressed vowel is omitted for convenient joining except in -men.
+    if l.word.endswith('\ue667\ue67a\ue666\ue653'):
+        print('{}:{}: ends with •low•utter•no•day; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
+    if l.word.endswith('\ue667\ue674\ue666\ue653'):
+        print('{}:{}: ends with •low•at•no•day; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
+    
+    # these interact with p. 19. terminal -ent (because these have a •may before it); refactor
+    if l.word.endswith('\ue665\ue67a\ue666\ue652'):
+        print('{}:{}: ends with •may•utter•no•tea; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
+    if l.word.endswith('\ue665\ue672\ue666\ue652'):
+        print('{}:{}: ends with •may•et•no•tea; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
+
+
     #print(l)
     
