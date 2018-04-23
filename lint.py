@@ -165,7 +165,7 @@ for line in fileinput.input(FILENAME):
     # these interact with p. 19. terminal -ent (because these have a •may before it); refactor
     if l.word.endswith('\ue665\ue67a\ue666\ue652'):
         print('{}:{}: ends with •may•utter•no•tea; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
-    if l.word.endswith('\ue665\ue672\ue666\ue652'):
+    if l.word.endswith('\ue665\ue672\ue666\ue652') and 'may-et-no-tea-ok' not in l.comment:
         print('{}:{}: ends with •may•et•no•tea; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
     
     if l.word.endswith('\ue665\ue67a\ue666') and 'may-utter-ok' not in l.comment:
