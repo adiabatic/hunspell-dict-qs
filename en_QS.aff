@@ -67,8 +67,9 @@ SFX  0  .
 
 # terminal -lI
 SFX  Y 2
-SFX  0  .
-SFX  0  [] # manual -> manually
+SFX     # total  → totally 
+SFX  0  [^] #  → 
+
 
 # terminal -@`
 SFX  Y 1
