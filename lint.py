@@ -84,10 +84,16 @@ def parse_line(l):
     r.inflectionalsuffixes = [] # feet st:foot is:plural
     r.comment = ''
     r.error = False
+    r.blank = False
     
     # see also: `man 5 hunspell, "optional data fields"`
     
     xs = l.split()
+    
+    if len(xs) == 0:
+        r.blank = True
+        return r
+    
     if '/' in xs[0]: (r.word, r.affixes) = xs[0].split('/')
     else:             r.word = xs[0]
     for i in range(1, len(xs)):
@@ -111,6 +117,8 @@ for line in fileinput.input(FILENAME):
     i = fileinput.filelineno()
     
     l = parse_line(line)
+    
+    if l.blank: continue
         
     if l.error:
         print(l.error)
