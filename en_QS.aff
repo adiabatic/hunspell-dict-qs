@@ -61,11 +61,9 @@ SFX     # total  → totally 
 SFX  0  [^] #  → 
 
 # terminal -m@nt (p. 20)
-# LibreOffice's affix file has L tack on -ment,-ments, and -ment's,
-# so automatically supplying the plural should be OK
 SFX  Y 2
 SFX  0 
-SFX  0 
+SFX  0  # LibreOffice has L add -ments
 
 # terminal -@`
 SFX  Y 1
