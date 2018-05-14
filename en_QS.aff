@@ -35,7 +35,7 @@ PFX r 0  .
 
 # terminal -z (or -s after p/t/k/T)
 SFX  Y 2
-SFX  0  .
+SFX  0  [^]
 SFX  0  []
 #  -> ? (or just for "knife" and "strife")
 
