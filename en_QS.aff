@@ -25,13 +25,8 @@ BREAK -
 BREAK –
 BREAK —
 
-
-# PFX <flag> <can combine prefix with a suffix? (Y/N)> <count for this flag>
-# PFX <flag> <letters to delete or 0> <prefix> [condition regex] [morphological fields]
-
-# re-
-PFX r Y 1
-PFX r 0  .
+# SFX <flag> <can combine suffix with a prefix? (Y/N)> <count for this flag>
+# SFX <flag> <letters to delete or 0> <suffix> [condition regex] [morphological fields]
 
 # terminal -z (or -s after p/t/k/T)
 SFX  Y 2
@@ -50,7 +45,8 @@ SFX  0  []
 # “bringing” only has the initial ;
 # “wing”, “things”, and “Epping” have the .
 #
-# “spell the root fully after a prefix or with somewhat changed meaning”
+# “spell the root fully (e.g. ‘’, not ‘’, after a prefix
+# or with somewhat changed meaning”
 # …I don’t understand this rule well enough to codify it.
 # terminal -N
 SFX  Y 2
@@ -81,11 +77,11 @@ SFX  0 
 SFX  Y 1
 SFX  0  .
 
-# TO PONDER: Should all prefixes be in Latin script?
+# Prefixes are all in Latin script.
 
 # initial @n- (p. 21)
-PFX  Y 1
-PFX  0  .
+PFX U Y 1
+PFX U 0  .
 
 # initial bI- (p. 22)
 PFX b Y 1
@@ -94,6 +90,10 @@ PFX b 0  .
 # initial dI- (p. 22)
 PFX d Y 1
 PFX d 0  .
+
+# re- (p. 22)
+PFX r Y 1
+PFX r 0  .
 
 # initial pre- (p. 22)
 PFX p Y 1
