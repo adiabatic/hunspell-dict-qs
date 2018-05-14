@@ -88,8 +88,8 @@ PFX  Y 1
 PFX  0  .
 
 # initial bI- (p. 22)
-PFX  Y 1
-PFX  0  .
+PFX b Y 1
+PFX b 0  .
 
 # initial dI- (p. 22)
 PFX d Y 1
