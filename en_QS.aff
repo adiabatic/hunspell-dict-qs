@@ -39,16 +39,10 @@ SFX  Y 2
 SFX  0  [^]
 SFX  0  []
 
-# “Terminal -ing” (from The Manual, p. 18)
-# “Provided it is an affix and not a root, omit vowel-.”
-# “calling”, “writings” and “lovingly” have no ;
-# “bringing” only has the initial ;
-# “wing”, “things”, and “Epping” have the .
-#
-# “spell the root fully (e.g. ‘’, not ‘’, after a prefix
-# or with somewhat changed meaning”
-# …I don’t understand this rule well enough to codify it.
-# terminal -N
+# For suffixes, omit  (, , )
+# For roots, include  (, , ·)
+# Spell _roots_ fully (“”, not “”), after prefixes or meaning changes
+# terminal -N (p. 18)
 SFX  Y 2
 SFX  0  .
 SFX  0  [] # “spell - in full after roots ending in -”
