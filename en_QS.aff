@@ -49,8 +49,8 @@ SFX  0  [] # “spell - in full after roots ending in -”
 
 # terminal -l (tribe/tribal)
 SFX 3 Y 2
-SFX 3 0  [^]
-SFX 3 0  [] # needs  before  after vowels ( doesn't count)
+SFX 3 0  [^] po:adj
+SFX 3 0  [] po:adj # needs  before  after vowels ( doesn't count)
 
 # terminal -@n (take/n) (p. 19)
 SFX  Y 1
