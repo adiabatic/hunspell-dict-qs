@@ -14,8 +14,14 @@ KEY ||�
 # REP <number of replacement definitions (not including this one)>
 # REP from to
 
-# WARN <flag> — warns when a word with this flag is used
+# for rare words that are probably misspellings: see -r in hunspell(1)
 WARN W
+
+FORBIDDENWORD F # affixed forms are also forbidden
+
+# SUBSTANDARD <flag> # "dunno"
+
+NOSUGGEST V # for obscenities: not suggested, but recognized
 
 # BREAK <number of break definitions>
 # BREAK <character or character sequence>
@@ -43,9 +49,10 @@ SFX  0  []
 # For roots, include  (, , ·) (that is, don’t use this rule)
 # Spell roots fully (“”, not “”), after prefixes or meaning changes
 # terminal -N (p. 18)
-SFX  Y 2
-SFX  0  [^]
+SFX  Y 3
+SFX  0  [^]
 SFX  0  [] # “spell - in full after roots ending in -”
+SFX    [] # terminal -l (p. 19)
 
 # terminal -l (tribe/tribal)
 SFX 3 Y 2
@@ -71,8 +78,9 @@ SFX  0 
 SFX  0  # LibreOffice has L add -ments
 
 # terminal -@`
-SFX  Y 1
-SFX  0  . po:noun
+SFX  Y 2
+SFX  0  [^] po:noun
+SFX    [] po:noun
 
 # Prefixes are all in Latin script.
 
