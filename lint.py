@@ -85,6 +85,8 @@ def parse_line(l):
     r.comment = ''
     r.error = False
     r.blank = False
+    r.extras = ''
+    r.po = ''
     
     # see also: `man 5 hunspell, "optional data fields"`
     
@@ -124,8 +126,9 @@ for line in fileinput.input(FILENAME):
         print(l.error)
         break
     
-    if l.word.startswith('\ue672\ue654\ue65a'): # ·et·key·see
-        pass
+    if l.word.startswith('\ue672\ue654\ue65a') \
+        and 'et-key-see-ok' not in l.comment: # ·et·key·see
+        print('{}:{}: Starts with ·et·key·see instead of ·it·key·see (disable with et-key-see-ok): {}'.format(FILENAME, i, latinize(l.word)))
     
     # p. 18: terminal -es, -ed
     # AFAICT these are entirely handled with the ·zoo and ·day suffixes in the .aff file.
@@ -134,8 +137,9 @@ for line in fileinput.input(FILENAME):
             print('{}:{}: Final ·zoo with preceding ·utter: {}'.format(FILENAME, i, latinize(l.word)))            
     
     # p. 18: terminal -ing
-    if l.word.endswith('\ue670\ue664') and not ('noun' in l.partofspeech):
-        print('{}:{}: Final -ing with preceding ·it: {}'.format(FILENAME, i, latinize(l.word)))
+    if l.word.endswith('\ue670\ue664') and not ('noun' in l.partofspeech) \
+       and 'it-ing-ok' not in l.comment:
+        print('{}:{}: Final ·-ing with preceding ·it: {}'.format(FILENAME, i, latinize(l.word)))
 
     # p. 19: terminal -al, el, -le, il
     # • Generally, omit any _unstressed_ vowel sound between the L and the preceding consonant,
