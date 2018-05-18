@@ -131,15 +131,12 @@ for line in fileinput.input(FILENAME):
         print('{}:{}: Starts with ·et·key·see instead of ·it·key·see (disable with et-key-see-ok): {}'.format(FILENAME, i, latinize(l.word)))
     
     # p. 18: terminal -es, -ed
-    # AFAICT these are entirely handled with the ·zoo and ·day suffixes in the .aff file.
-    if False and l.word.endswith('\ue65b'): # ·zoo
-        if l.word.endswith('\ue67a\ue65b'): # ·utter ·zoo
-            print('{}:{}: Final ·zoo with preceding ·utter: {}'.format(FILENAME, i, latinize(l.word)))            
+    # Handled entirely with the ·zoo and ·day suffixes in the .aff file.
     
     # p. 18: terminal -ing
     if l.word.endswith('\ue670\ue664') and not ('noun' in l.partofspeech) \
-       and 'it-ing-ok' not in l.comment:
-        print('{}:{}: Final ·-ing with preceding ·it: {}'.format(FILENAME, i, latinize(l.word)))
+        and 'it-ing-ok' not in l.comment:
+        print('{}:{}: Final ·-ing with preceding ·it (OK for nouns and it-ing-ok): {}'.format(FILENAME, i, latinize(l.word)))
 
     # p. 19: terminal -al, el, -le, il
     # • Generally, omit any _unstressed_ vowel sound between the L and the preceding consonant,
