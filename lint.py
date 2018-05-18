@@ -58,7 +58,7 @@ M = {
 }
 
 for k, v in M.items():
-    M[k] = "•" + v
+    M[k] = "·" + v
 
 VOWELS = set(chr(x) for x in range(0xe670, 0xe67e+1))
 VOWELS_AND_SEMIVOWELS = VOWELS.union(set('\ue660'))
@@ -124,60 +124,63 @@ for line in fileinput.input(FILENAME):
         print(l.error)
         break
     
+    if l.word.startswith('\ue672\ue654\ue65a'): # ·et·key·see
+        pass
+    
     # p. 18: terminal -es, -ed
-    # AFAICT these are entirely handled with the •zoo and •day suffixes in the .aff file.
-    if False and l.word.endswith('\ue65b'): # •zoo
-        if l.word.endswith('\ue67a\ue65b'): # •utter •zoo
-            print('{}:{}: Final •zoo with preceding •utter: {}'.format(FILENAME, i, latinize(l.word)))            
+    # AFAICT these are entirely handled with the ·zoo and ·day suffixes in the .aff file.
+    if False and l.word.endswith('\ue65b'): # ·zoo
+        if l.word.endswith('\ue67a\ue65b'): # ·utter ·zoo
+            print('{}:{}: Final ·zoo with preceding ·utter: {}'.format(FILENAME, i, latinize(l.word)))            
     
     # p. 18: terminal -ing
     if l.word.endswith('\ue670\ue664') and not ('noun' in l.partofspeech):
-        print('{}:{}: Final -ing with preceding •it: {}'.format(FILENAME, i, latinize(l.word)))
+        print('{}:{}: Final -ing with preceding ·it: {}'.format(FILENAME, i, latinize(l.word)))
 
     # p. 19: terminal -al, el, -le, il
     # • Generally, omit any _unstressed_ vowel sound between the L and the preceding consonant,
     #   as in "triba̷l", "fina̷l", "ora̷l", "offici̷a̷l", "rifle̷", "devi̷l"
     # • Where another syllable is added, the vowel sound before this L must be pronounced and spelt
     #   in most cases, as in "fina̲lly", "ora̲lly", "officia̲lly", "devi̲lry"
-    # • Ls don't need a vowel before the •ye in "Spaniel", but you need an •utter before •low in
+    # • Ls don't need a vowel before the ·ye in "Spaniel", but you need an ·utter before ·low in
     #   "burial", "visual", and "loyal".
-    if l.word.endswith('\ue667'): # •low
+    if l.word.endswith('\ue667'): # ·low
         if False and len(l.word) >=2 and l.word[-2] in VOWELS: # lots of false positives
             print('{}:{}: Final -l with preceding (unstressed?) vowel: {}'.format(FILENAME, i, latinize(l.word)))
         if len(l.word) >= 3 and \
-           l.word[-2] in {'\ue67a': '•utter'}.keys() and \
+           l.word[-2] in {'\ue67a': '·utter'}.keys() and \
            l.word[-3] not in VOWELS and \
            "utter-low-ok" not in l.comment:
-            print('{}:{}: Final -l with preceding •utter: {}'.format(FILENAME, i, latinize(l.word)))
+            print('{}:{}: Final -l with preceding ·utter: {}'.format(FILENAME, i, latinize(l.word)))
     
     # p. 19: terminal -tion, -ssion, -shion, -cean, -sion, -gion, -ation, -asion.
     # - omit the vowel
     # p. 19: terminal -en, -on.
-    # Written invariably as •utter•no; no contraction, no alternatives.
-    # [implementer’s note: how in blazes is a modern English speaker supposed to differentiate between the two without referencing Orthodox? I’m tempted to codify “always elide the •utter”, but then I’d be overstepping my bounds as a dictionary author…]
+    # Written invariably as ·utter·no; no contraction, no alternatives.
+    # [implementer’s note: how in blazes is a modern English speaker supposed to differentiate between the two without referencing Orthodox? I’m tempted to codify “always elide the ·utter”, but then I’d be overstepping my bounds as a dictionary author…]
     
     # p. 19: terminal -ent, -ant, -ence, -ance
-    # written invariably with standard •utter•no followed by a penlift
+    # written invariably with standard ·utter·no followed by a penlift
     if l.word.endswith('\ue672\ue666\ue652') and 'et-no-tea-ok' not in l.comment:
-        print('{}:{}: ends with •et•no•tea; prefer •utter•no•tea: {}'.format(FILENAME, i, latinize(l.word)))    
+        print('{}:{}: ends with ·et·no·tea; prefer ·utter·no·tea: {}'.format(FILENAME, i, latinize(l.word)))    
     if l.word.endswith('\ue672\ue666\ue65a') and 'et-no-see-ok' not in l.comment:
-        print('{}:{}: ends with •et•no•see; prefer •utter•no•see: {}'.format(FILENAME, i, latinize(l.word)))    
+        print('{}:{}: ends with ·et·no·see; prefer ·utter·no·see: {}'.format(FILENAME, i, latinize(l.word)))    
     
     # p. 20: terminal -land, -ment, -man, -men
     # The unstressed vowel is omitted for convenient joining except in -men.
     if l.word.endswith('\ue667\ue67a\ue666\ue653'):
-        print('{}:{}: ends with •low•utter•no•day; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
+        print('{}:{}: ends with ·low·utter·no·day; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
     if l.word.endswith('\ue667\ue674\ue666\ue653'):
-        print('{}:{}: ends with •low•at•no•day; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
+        print('{}:{}: ends with ·low·at·no·day; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
     
-    # these interact with p. 19. terminal -ent (because these have a •may before it); refactor
+    # these interact with p. 19. terminal -ent (because these have a ·may before it); refactor
     if l.word.endswith('\ue665\ue67a\ue666\ue652'):
-        print('{}:{}: ends with •may•utter•no•tea; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
+        print('{}:{}: ends with ·may·utter·no·tea; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
     if l.word.endswith('\ue665\ue672\ue666\ue652') and 'may-et-no-tea-ok' not in l.comment:
-        print('{}:{}: ends with •may•et•no•tea; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
+        print('{}:{}: ends with ·may·et·no·tea; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
     
     if l.word.endswith('\ue665\ue67a\ue666') and 'may-utter-ok' not in l.comment:
-        print('{}:{}: ends with •may•utter•no; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
+        print('{}:{}: ends with ·may·utter·no; remove unstressed vowels: {}'.format(FILENAME, i, latinize(l.word)))
 
 
     #print(l)
